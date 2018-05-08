@@ -1,3 +1,5 @@
+namespace java io.github.yuokada
+
 typedef i32 int
 
 service MultiplicationService
