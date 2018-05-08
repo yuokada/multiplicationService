@@ -10,7 +10,7 @@ import org.apache.thrift.transport.TTransportException;
 
 public class MultiplicationClient {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         try {
             TTransport transport = new TSocket("localhost", 9090);
             transport.open();
