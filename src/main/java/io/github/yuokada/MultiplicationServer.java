@@ -1,23 +1,23 @@
 package io.github.yuokada;
 
 import org.apache.thrift.server.TServer;
-import org.apache.thrift.server.TServer.Args;
-import org.apache.thrift.server.TSimpleServer;
+import org.apache.thrift.server.TThreadPoolServer;
 import org.apache.thrift.transport.TServerSocket;
 import org.apache.thrift.transport.TServerTransport;
 
 public class MultiplicationServer {
 
     public static void StartsimpleServer(
-        MultiplicationService.Processor<MultiplicationServiceHandler> processor){
+        MultiplicationService.Processor<MultiplicationServiceHandler> processor) {
         try {
             TServerTransport serverTransport = new TServerSocket(9090);
-            TServer server = new TSimpleServer(
-                new Args(serverTransport).processor(processor));
+
+            // TServer server = new TSimpleServer(
+            //        new Args(serverTransport).processor(processor));
 
             // Use this for a multithreaded server
-            // TServer server = new TThreadPoolServer(new
-            // TThreadPoolServer.Args(serverTransport).processor(processor));
+            TServer server = new TThreadPoolServer(new
+                TThreadPoolServer.Args(serverTransport).processor(processor));
 
             System.out.println("Starting the simple server...");
             server.serve();
@@ -26,9 +26,8 @@ public class MultiplicationServer {
         }
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         StartsimpleServer(new MultiplicationService.Processor<MultiplicationServiceHandler>(
             new MultiplicationServiceHandler()));
     }
-
 }
