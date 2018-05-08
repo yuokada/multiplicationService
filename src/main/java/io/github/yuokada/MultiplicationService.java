@@ -149,7 +149,6 @@ public class MultiplicationService {
         return false;
       }
 
-      @Override
       protected boolean handleRuntimeExceptions() {
         return false;
       }
