@@ -1,3 +1,5 @@
+package io.github.yuokada;
+
 import org.apache.thrift.TException;
 
 public class MultiplicationServiceHandler implements MultiplicationService.Iface {
