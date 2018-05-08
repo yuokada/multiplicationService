@@ -23,6 +23,7 @@ repositories {
 
 dependencies {
   compile group: 'com.google.inject', name: 'guice', version: '4.2.0'
+  compile group: 'io.airlift', name: 'bootstrap', version: '0.168'
 
   compile group: 'io.airlift.drift', name: 'drift-codec', version: '1.9'
   compile group: 'io.airlift.drift', name: 'drift-client', version: '1.9'
