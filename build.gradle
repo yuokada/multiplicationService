@@ -1,8 +1,15 @@
-apply plugin: 'java'
-apply plugin: 'maven'
+plugins {
+ id "java"
+ id "checkstyle"
+ id "findbugs"
+}
 
 group = 'multiplicationService'
 version = '0.1-SNAPSHOT'
+
+configurations {
+  provided
+}
 
 description = """"""
 
@@ -10,9 +17,34 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
-
   maven { url "http://repo.maven.apache.org/maven2" }
 }
+
 dependencies {
+  compile group: 'io.airlift.drift', name: 'drift-codec', version: '1.9'
+  compile group: 'io.airlift.drift', name: 'drift-client', version: '1.9'
+  compile group: 'io.airlift.drift', name: 'drift-server', version: '1.9'
+  compile group: 'io.airlift.drift', name: 'drift-protocol', version: '1.9'
+  compile group: 'io.airlift.drift', name: 'drift-transport-netty', version: '1.9'
+  compile group: 'io.airlift.drift', name: 'drift-transport-spi', version: '1.9'
+
   compile group: 'org.apache.thrift', name: 'libthrift', version: '0.10.0'
 }
+
+checkstyle {
+  configFile = file("${project.rootDir}/config/checkstyle/checkstyle.xml")
+  toolVersion = '6.14.1'
+}
+checkstyleMain {
+  configFile = file("${project.rootDir}/config/checkstyle/default.xml")
+  ignoreFailures = false
+}
+checkstyleTest {
+  configFile = file("${project.rootDir}/config/checkstyle/default.xml")
+  ignoreFailures = true
+}
+task checkstyle(type: Checkstyle) {
+  classpath = sourceSets.main.output + sourceSets.test.output
+  source = sourceSets.main.allJava + sourceSets.test.allJava
+}
+
