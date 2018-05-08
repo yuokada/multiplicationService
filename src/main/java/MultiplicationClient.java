@@ -11,9 +11,7 @@ public class MultiplicationClient {
     public static void main(String[] args){
 
         try {
-            TTransport transport;
-
-            transport = new TSocket("localhost", 9090);
+            TTransport transport = new TSocket("localhost", 9090);
             transport.open();
 
             TProtocol protocol = new TBinaryProtocol(transport);
